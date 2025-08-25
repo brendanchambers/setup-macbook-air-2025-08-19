@@ -2,5 +2,9 @@
 
 New local machine, setup for dev.  
   
-`uv run python main.py`  
+```
+cd scripts  
+bash setup.sh  
+uv run python main.py  
+```
 
