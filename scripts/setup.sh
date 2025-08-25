@@ -2,6 +2,8 @@
 cd ..
 
 
+
+
 # install uv
 do_install_uv=true
 if $do_install_uv; then
@@ -10,8 +12,11 @@ fi
 # initialize new project
 uv init
 
+# configure git identity
+git config --global user.name "my name"
+git config --global user.email "myemail@host.com"
 
-# create ssh key (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+# create ssh key for github (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 pushd ~
 ssh-keygen -t ed25519 -C "my-email@host.com"  # avoid uploading true email
 eval "$(ssh-agent -s)"
@@ -22,6 +27,5 @@ echo "Host github.com\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile ~
 #   UseKeychain yes
 #   IdentityFile ~/.ssh/id_ed25519
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-
-
 popd
+
