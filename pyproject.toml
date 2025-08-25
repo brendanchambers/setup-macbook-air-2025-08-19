@@ -1,0 +1,7 @@
+[project]
+name = "setup-macbook-air-2025-08-19"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
