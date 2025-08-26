@@ -3,8 +3,7 @@
 New local machine, setup for dev.  
   
 ```
-cd scripts  
-bash setup.sh  
+bash scripts/setup.sh  
 uv run python main.py  
 ```
 

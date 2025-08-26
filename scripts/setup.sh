@@ -1,10 +1,7 @@
-# assume we are running from project top level
-cd ..
-
-
-
-
 # install uv
+# assume wd == <project_top_level_dir>
+bash scripts/info.sh
+
 do_install_uv=true
 if $do_install_uv; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -17,7 +14,7 @@ git config --global user.name "my name"
 git config --global user.email "myemail@host.com"
 
 # create ssh key for github (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-pushd ~
+pushd ~  #
 ssh-keygen -t ed25519 -C "my-email@host.com"  # avoid uploading true email
 eval "$(ssh-agent -s)"
 touch ~/.ssh/config
