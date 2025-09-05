@@ -1,38 +1,49 @@
+source config/.env_azure
+
 export RANDOM_SUFFIX=$(openssl rand -hex 3)
-export REGION="eastus2"
-export MY_RESOURCE_GROUP_NAME="myResourceGroupVM457386"
+export REGION=$REGION
 echo $MY_RESOURCE_GROUP_NAME
 
 
 export MY_VM_NAME="myVM$RANDOM_SUFFIX"
+# create the vm
+#   (we want to delete all attached resources when deleting vm)
 az vm create \
     --resource-group $MY_RESOURCE_GROUP_NAME \
     --name $MY_VM_NAME \
-    --image Debian11 \
+    --image Ubuntu2404 \
     --size Standard_B1s \
     --public-ip-sku Standard \
-    --admin-username azureuser \
+    --os-disk-delete-option Delete \
+    --data-disk-delete-option Delete \
+    --nic-delete-option Delete \
+    --admin-username $MY_USERNAME \
     --generate-ssh-keys
+
 
 
 # example return json:
 
 # {
 #   "fqdns": "",
-#   "id": "/subscriptions/391890ff-8ece-4428-b181-6b323132f793/resourceGroups/myResourceGroupVM457386/providers/Microsoft.Compute/virtualMachines/myVM8e1bc2",
+#   "id": "/subscriptions/391890ff-8ece-4428-b181-6b323132f793/resourceGroups/myResourceGroupVM9b9095/providers/Microsoft.Compute/virtualMachines/myVM7b20e7",
 #   "location": "eastus2",
-#   "macAddress": "7C-1E-52-8F-D6-4F",
+#   "macAddress": "7C-1E-52-ED-45-EA",
 #   "powerState": "VM running",
-#   "privateIpAddress": "172.16.0.6",
-#   "publicIpAddress": "128.24.88.13",
-#   "resourceGroup": "myResourceGroupVM457386"
+#   "privateIpAddress": "10.0.0.4",
+#   "publicIpAddress": "135.119.165.245",
+#   "resourceGroup": "myResourceGroupVM9b9095"
 # }
 
+
+
+# TODO write metadata to config/.env_vm_tmp
 
 
 
 
 # you can check on resources here: https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse
+#.  I am currently stopping and deleting VMs manually from this portal
 
 # SSH key files '/Users/bc/.ssh/id_rsa' and '/Users/bc/.ssh/id_rsa.pub' have been generated under ~/.ssh to allow SSH access to the VM.
 # If using machines without permanent storage, back up your keys to a safe location.

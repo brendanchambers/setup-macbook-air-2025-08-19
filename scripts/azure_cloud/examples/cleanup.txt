@@ -1,0 +1,23 @@
+
+
+After deleting a VM,
+I thiink the cleanup steps are:
+ 
+- Delete the disk (via portal: click on disk, unattach if needed, delete)
+    (via cli: todo)
+
+- Delete Network security group
+
+- Delete the public ip address
+
+- Delete the network interface
+
+- Delete the virtual network if desired
+
+
+OR, delete the entire resource group and create a enw one
+
+
+
+# looks like we can achieve this by specifying delete behavior during vm creation
+https://stackoverflow.com/questions/69814304/azure-script-or-command-to-delete-instance-and-all-its-associated-resources-di

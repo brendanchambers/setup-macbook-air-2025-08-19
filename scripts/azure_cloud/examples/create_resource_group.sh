@@ -3,7 +3,7 @@ export REGION="eastus2"
 export MY_RESOURCE_GROUP_NAME="myResourceGroupVM$RANDOM_SUFFIX"
 echo $MY_RESOURCE_GROUP_NAME
 
-az group create --name $MY_RESOURCE_GROUP_NAME --location $REGION.  # just need to run this once though
+az group create --name $MY_RESOURCE_GROUP_NAME --location $REGION  # just need to run this once though
 # todo save the returned json, which will look like e.g.
 
 # {
@@ -17,3 +17,7 @@ az group create --name $MY_RESOURCE_GROUP_NAME --location $REGION.  # just need 
 #   "tags": null,
 #   "type": "Microsoft.Resources/resourceGroups"
 # }
+
+
+
+# I manually delete these once in a while for now, while learning

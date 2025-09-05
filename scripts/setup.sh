@@ -1,6 +1,7 @@
 # install uv
 # assume wd == <project_top_level_dir>
 bash scripts/info.sh
+source config/.secret
 
 do_install_uv=true
 if $do_install_uv; then
@@ -10,12 +11,12 @@ fi
 uv init
 
 # configure git identity
-git config --global user.name "my name"
-git config --global user.email "myemail@host.com"
+git config --global user.name $GIT_NAME
+git config --global user.email $GIT_EMAIL
 
 # create ssh key for github (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 pushd ~  #
-ssh-keygen -t ed25519 -C "my-email@host.com"  # avoid uploading true email
+ssh-keygen -t ed25519 -C $GIT_EMAIL  # avoid uploading true email
 eval "$(ssh-agent -s)"
 touch ~/.ssh/config
 echo "Host github.com\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
@@ -26,9 +27,10 @@ echo "Host github.com\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile ~
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 popd
 
-# turn off the doublespace insert period annoying setting
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false  # todo test this. for now I toggled via settings menu
-sudo reboot  # todo test this, is this actually a mac command?
+# turn off the doublespace insert period annoying setting manually via settings widget
+# try to do this programatically (todo test, I don't think this is quite right)
+# defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false  # todo test this. for now I toggled via settings menu
+# sudo reboot  # todo untested, just a rough sketch
 
 # homebrew (package manager)
 #  https://docs.brew.sh
