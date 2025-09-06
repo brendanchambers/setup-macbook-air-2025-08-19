@@ -16,6 +16,10 @@ export IP_ADDRESS=$(az vm show \
     --name $MY_VM_NAME \
     --query publicIps \
     --output tsv)
+echo $IP_ADDRESS
+# > config/.env_vm_main  # (unsafe but convenient option here) overwrite with empty input and touch
+touch .env_vm_main
+echo "export IP_ADDRESS=$IP_ADDRESS" > config/.env_vm_tmp  # includes implicit newline
 # connect w ssh key
 ssh -i ~/.ssh/id_rsa $MY_USERNAME@$IP_ADDRESS
         # verify fingerprint for extra security from man-in-the-middle pwns
@@ -25,3 +29,8 @@ ssh -i ~/.ssh/id_rsa $MY_USERNAME@$IP_ADDRESS
 
 
 # success
+
+# try launching remote ssh
+# code --remote ssh-remote+$ip_address /home/$MY_USERNAME
+
+
