@@ -19,6 +19,13 @@ az network nsg delete \
     --name "${MY_VM_NAME}NSG" \
     --subscription $MY_SUBSCRIPTION
 
+az network nsg delete \
+    --resource-group $MY_RESOURCE_GROUP_NAME \
+    --name $MY_VM_NAME \
+    --subscription $MY_SUBSCRIPTION
+
+# I'm not sure which name is correct so I am deleting both
+
 # todo probably don't want a public ip anyway
 echo "deleting public ip address..."
 echo "${MY_VM_NAME}PublicIP"
@@ -28,7 +35,15 @@ az network public-ip delete \
      --name "${MY_VM_NAME}PublicIP" \
      --subscription $MY_SUBSCRIPTION
 
+az network public-ip delete \
+    --resource-group $MY_RESOURCE_GROUP_NAME \
+     --name $MY_VM_NAME \
+     --subscription $MY_SUBSCRIPTION
+# I'm not sure which name is correct so I am deleting both
+
+
 
 # todo you may also want to delete the virtual network
+
 
 

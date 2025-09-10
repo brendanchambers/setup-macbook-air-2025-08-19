@@ -5,6 +5,11 @@ export REGION=$REGION
 echo $MY_RESOURCE_GROUP_NAME
 
 
+# you may need to adjust quotas.
+#   via portal: https://portal.azure.com/#view/Microsoft_Azure_Capacity/QuotaMenuBlade/~/myQuotas
+#   todo can we check and if needed adjust in code
+
+
 # a few useful fields
 #  Standard_NC4as_T4_v3     (T4s) 
 #  Standard_B1s  (free tier option)
@@ -18,7 +23,7 @@ az vm create \
     --resource-group $MY_RESOURCE_GROUP_NAME \
     --name $MY_VM_NAME \
     --image Ubuntu2404 \
-    --size Standard_B1s \
+    --size Standard_NC4as_T4_v3 \
     --public-ip-sku Standard \
     --os-disk-delete-option Delete \
     --data-disk-delete-option Delete \
@@ -118,9 +123,9 @@ ip_address=$(az vm show \
 # make a copy of the ssh config file in case of fxckup
 scp $ssh_config_path "${ssh_config_path}_backup-snapshot"
 
-minimal_config_for_remote_ssh="Host $ip_address\n\t"HostName" $ip_address\n\tUser $MY_USERNAME\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile $ssh_public_key_path"
+minimal_config_for_remote_ssh="\nHost $ip_address\n\t"HostName" $ip_address\n\tUser $MY_USERNAME\n\tAddKeysToAgent yes\n\tUseKeychain yes\n\tIdentityFile $ssh_public_key_path"
 
-echo -e $minimal_config_for_remote_ssh > $ssh_config_path
+echo -e $minimal_config_for_remote_ssh >> $ssh_config_path
 
-# try launching the remote connection
-code --remote ssh-remote+$ip_address /home/$MY_USERNAME
+# try launching the remote connection extension (not working for me, todo would be nice to launch this automatically)
+# code --remote ssh-remote+$ip_address /home/$MY_USERNAME
