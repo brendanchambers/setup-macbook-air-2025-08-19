@@ -18,7 +18,7 @@ export IP_ADDRESS=$(az vm show \
     --output tsv)
 echo $IP_ADDRESS
 # > config/.env_vm_main  # (unsafe but convenient option here) overwrite with empty input and touch
-touch .env_vm_main
+touch config/.env_vm_main # <-- todo
 echo "export IP_ADDRESS=$IP_ADDRESS" > config/.env_vm_tmp  # includes implicit newline
 # connect w ssh key
 ssh -i ~/.ssh/id_rsa $MY_USERNAME@$IP_ADDRESS

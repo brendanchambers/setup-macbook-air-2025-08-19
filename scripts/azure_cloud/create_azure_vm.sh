@@ -56,14 +56,6 @@ az vm create \
 # you can check on resources here: https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse
 #.  I am currently stopping and deleting VMs manually from this portal
 
-# SSH key files '/Users/bc/.ssh/id_rsa' and '/Users/bc/.ssh/id_rsa.pub' have been generated under ~/.ssh to allow SSH access to the VM.
-# If using machines without permanent storage, back up your keys to a safe location.
-
-
-
-
-
-
 
 # ---> example failure message
 # azure.core.exceptions.HttpResponseError: (InvalidTemplateDeployment) The template deployment 'vm_deploy_zITDsgrSdIkxeC46hCSKkjzeKg29ooFs' is not valid according to the validation procedure. The tracking id is 'dcc0eb8f-d907-4e0e-a2a3-e799a138714e'. See inner errors for details.
@@ -72,9 +64,6 @@ az vm create \
 # Exception Details:      (SkuNotAvailable) The requested VM size for resource 'Following SKUs have failed for Capacity Restrictions: Standard_DS1_v2' is currently not available in location 'eastus2'. Please try another size or deploy to a different location or different zone. See https://aka.ms/azureskunotavailable for details.
 #         Code: SkuNotAvailable
 #         Message: The requested VM size for resource 'Following SKUs have failed for Capacity Restrictions: Standard_DS1_v2' is currently not available in location 'eastus2'. Please try another size or deploy to a different location or different zone. See https://aka.ms/azureskunotavailable for details.
-
-
-
 
 
 
